@@ -1,5 +1,5 @@
 QBShared = QBShared or {}
-QBShared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefaultDuty | false: set duty state from database last saved
+QBShared.ForceJobDefaultDutyAtLogin = false -- true: Force duty state to jobdefaultDuty | false: set duty state from database last saved
 QBShared.Jobs = {
 	['unemployed'] = {
 		label = 'Civilian',
@@ -7,37 +7,91 @@ QBShared.Jobs = {
 		offDutyPay = false,
 		grades = {
             ['0'] = {
-                name = 'Freelancer',
+                name = 'Desempregado',
                 payment = 10
             },
         },
 	},
 	['police'] = {
-		label = 'Law Enforcement',
+		label = 'LSPD',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
             ['0'] = {
-                name = 'Recruit',
+                name = 'Recruta',
                 payment = 50
             },
 			['1'] = {
-                name = 'Officer',
-                payment = 75
-            },
-			['2'] = {
-                name = 'Sergeant',
-                payment = 100
-            },
-			['3'] = {
-                name = 'Lieutenant',
-                payment = 125
-            },
-			['4'] = {
-                name = 'Chief',
-				isboss = true,
+                name = 'Agente Provisório',
                 payment = 150
             },
+			['2'] = {
+                name = 'Agente I',
+                payment = 150
+            },
+			['3'] = {
+                name = 'Agente II',
+                payment = 150
+            },
+			['4'] = {
+                name = 'Agente III',
+                payment = 150
+            },
+            ['5'] = {
+                name = 'Agente IV',
+                payment = 150
+            },
+            ['6'] = {
+                name = 'Agente V',
+                payment = 150
+            },
+            ['7'] = {
+                name = 'Agente Principal I',
+                payment = 150
+            },
+            ['8'] = {
+                name = 'Agente Principal II',
+                payment = 150
+            },
+            ['9'] = {
+                name = 'Agente Principal III',
+                payment = 150
+            },
+            ['10'] = {
+                name = 'Agente Coordenador',
+                payment = 150
+            },
+            ['11'] = {
+                name = 'Sargento I',
+                isboss = true,
+                payment = 150
+            },
+            ['12'] = {
+                name = 'Sargento II',
+                isboss = true,
+                payment = 150
+            },
+            ['13'] = {
+                name = 'Tenente I',
+                isboss = true,
+                payment = 150
+            },
+            ['14'] = {
+                name = 'Tenente II',
+                isboss = true,
+                payment = 150
+            },
+            ['15'] = {
+                name = 'Major',
+                isboss = true,
+                payment = 150
+            },
+            ['16'] = {
+                name = 'Comandante',
+                isboss = true,
+                payment = 150
+            },
+
         },
 	},
 	['ambulance'] = {

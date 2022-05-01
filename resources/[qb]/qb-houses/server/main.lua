@@ -7,7 +7,6 @@ local housesLoaded = false
 -- Threads
 
 CreateThread(function()
-    local HouseGarages = {}
     local result = MySQL.Sync.fetchAll('SELECT * FROM houselocations', {})
     if result[1] then
         for k, v in pairs(result) do
@@ -26,13 +25,8 @@ CreateThread(function()
                 garage = garage,
                 decorations = {}
             }
-            HouseGarages[v.name] = {
-                label = v.label,
-                takeVehicle = garage
-            }
         end
     end
-    TriggerClientEvent("qb-garages:client:houseGarageConfig", -1, HouseGarages)
     TriggerClientEvent("qb-houses:client:setHouseConfig", -1, Config.Houses)
 end)
 
@@ -61,17 +55,20 @@ QBCore.Commands.Add("decorate", Lang:t("info.decorate_interior"), {}, false, fun
     TriggerClientEvent("qb-houses:client:decorate", src)
 end)
 
-QBCore.Commands.Add("createhouse", Lang:t("info.create_house"), {{name = "price", help = Lang:t("info.price_of_house")}, {name = "tier", help = Lang:t("info.tier_number")}}, true, function(source, args)
+QBCore.Commands.Add("createhouse", "Create House (Real Estate Only)", {{name = "apartmentnumber", help = "Apartment number"}, {name = "price", help = "Price of the house"}, {name = "tier", help = "Name of the item(no label)"}}, true, function(source, args)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local price = tonumber(args[1])
-    local tier = tonumber(args[2])
+	local apartmentnumber = tonumber(args[1])
+    local price = tonumber(args[2])
+    local tier = tonumber(args[3])
     if Player.PlayerData.job.name == "realestate" then
-        TriggerClientEvent("qb-houses:client:createHouses", src, price, tier)
+        TriggerClientEvent("qb-houses:client:createHouses", src, apartmentnumber, price, tier)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.realestate_only"), "error")
+        TriggerClientEvent('QBCore:Notify', src, "Only realestate can use this command", "error")
     end
 end)
+
+
 
 QBCore.Commands.Add("addgarage", Lang:t('info.add_garage'), {}, false, function(source)
     local src = source
@@ -169,9 +166,8 @@ RegisterNetEvent('qb-houses:server:addNewHouse', function(street, coords, price,
     local street = street:gsub("%'", "")
     local price = tonumber(price)
     local tier = tonumber(tier)
-    local houseCount = GetHouseStreetCount(street)
-    local name = street:lower() .. tostring(houseCount)
-    local label = street .. " " .. tostring(houseCount)
+	local name = street:lower()
+    local label = street
     MySQL.Async.insert('INSERT INTO houselocations (name, label, coords, owned, price, tier) VALUES (?, ?, ?, ?, ?, ?)',
         {name, label, json.encode(coords), 0, price, tier})
     Config.Houses[name] = {
@@ -185,19 +181,15 @@ RegisterNetEvent('qb-houses:server:addNewHouse', function(street, coords, price,
         decorations = {}
     }
     TriggerClientEvent("qb-houses:client:setHouseConfig", -1, Config.Houses)
-    TriggerClientEvent('QBCore:Notify', src, Lang:t("info.added_house", {value = label}))
-    TriggerEvent('qb-log:server:CreateLog', 'house', Lang:t("log.house_created"), 'green', Lang:t("log.house_address", {label = label, price = price, tier = tier, agent = GetPlayerName(src)}))
+    TriggerClientEvent('QBCore:Notify', src, "You have added a house: " .. label)
+    TriggerEvent('qb-log:server:CreateLog', 'house', 'House Created:', 'green', '**Address**:\n'..label..'\n\n**Listing Price**:\n$'..price..'\n\n**Tier**:\n'..tier..'\n\n**Listing Agent**:\n'..GetPlayerName(src))
 end)
 
 RegisterNetEvent('qb-houses:server:addGarage', function(house, coords)
     local src = source
-    MySQL.Async.execute('UPDATE houselocations SET garage = ? WHERE name = ?', {json.encode(coords), house})
-    local garageInfo = {
-        label = Config.Houses[house].adress,
-        takeVehicle = coords
-    }
-    TriggerClientEvent("qb-garages:client:addHouseGarage", -1, house, garageInfo)
-    TriggerClientEvent('QBCore:Notify', src, Lang:t("info.added_garage", {value = garageInfo.label}))
+    MySQL.Async.fetchAll('UPDATE houselocations SET garage = ? WHERE name = ?', {json.encode(coords), house})
+    TriggerClientEvent("Prime-Parking:client:updateGarage", -1) 	-- Update Garages
+    TriggerClientEvent('QBCore:Notify', src, "You have added a garage: " .. Config.Houses[house].adress)
 end)
 
 RegisterNetEvent('qb-houses:server:viewHouse', function(house)
@@ -220,13 +212,6 @@ RegisterNetEvent('qb-houses:server:buyHouse', function(house)
     local HousePrice = math.ceil(price * 1.21)
     local bankBalance = pData.PlayerData.money["bank"]
 
-    local isOwned = isHouseOwned(house)
-    if isOwned then
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.already_owned"), "error")
-        CancelEvent()
-        return
-    end
-
     if (bankBalance >= HousePrice) then
         houseowneridentifier[house] = pData.PlayerData.license
         houseownercid[house] = pData.PlayerData.citizenid
@@ -234,15 +219,14 @@ RegisterNetEvent('qb-houses:server:buyHouse', function(house)
             [1] = pData.PlayerData.citizenid
         }
         MySQL.Async.insert('INSERT INTO player_houses (house, identifier, citizenid, keyholders) VALUES (?, ?, ?, ?)',{house, pData.PlayerData.license, pData.PlayerData.citizenid, json.encode(housekeyholders[house])})
-        MySQL.Async.execute('UPDATE houselocations SET owned = ? WHERE name = ?', {1, house})
+        MySQL.Async.fetchAll('UPDATE houselocations SET owned = ? WHERE name = ?', {1, house})
         TriggerClientEvent('qb-houses:client:SetClosestHouse', src)
-        TriggerClientEvent('qb-house:client:RefreshHouseTargets', src)
         pData.Functions.RemoveMoney('bank', HousePrice, "bought-house") -- 21% Extra house costs
-        exports['qb-management']:AddMoney("realestate", (HousePrice / 100) * math.random(18, 25))
-        TriggerEvent('qb-log:server:CreateLog', 'house', Lang:t("log.house_purchased"), 'green', Lang:t("log.house_purchased_by", {house = house:upper(), price = HousePrice, firstname = pData.PlayerData.charinfo.firstname, lastname = pData.PlayerData.charinfo.lastname}))
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("success.house_purchased"), 'success', 5000)
-    else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.not_enough_money"), "error")
+        TriggerEvent('qb-bossmenu:server:addAccountMoney', "realestate", (HousePrice / 100) * math.random(18, 25))
+        TriggerEvent('qb-log:server:CreateLog', 'house', 'House Purchased:', 'green', '**Address**:\n'..house:upper()..'\n\n**Purchase Price**:\n$'..HousePrice..'\n\n**Purchaser**:\n'..pData.PlayerData.charinfo.firstname..' '..pData.PlayerData.charinfo.lastname)
+		TriggerClientEvent("Prime-Parking:client:updateGarage", -1) 	-- Update Garages	
+	else
+        TriggerClientEvent('QBCore:Notify', source, "You dont have enough money..", "error")
     end
 end)
 

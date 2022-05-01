@@ -115,13 +115,40 @@ local function openBuyContract(sellerData, vehicleData)
     })
 end
 
+local function SellToDealer(sellVehData, vehicleHash)
+    CreateThread(function()
+        local keepGoing = true
+        while keepGoing do
+            local coords = GetEntityCoords(vehicleHash)
+            DrawText3Ds(coords.x, coords.y, coords.z + 1.6, '~g~7~w~ - Confirmar / ~r~8~w~ - Cancelar ~g~')
+            if IsDisabledControlJustPressed(0, 161) then
+                TriggerServerEvent('qb-occasions:server:sellVehicleBack', sellVehData)
+                local plate = QBCore.Functions.GetPlate(vehicleHash)
+                TriggerServerEvent('Prime-Parking:server:removeOutsideVehicles', plate)
+                QBCore.Functions.DeleteVehicle(vehicleHash)
+                keepGoing = false
+            end
+            if IsDisabledControlJustPressed(0, 162) then
+                keepGoing = false
+            end
+            if #(Config.SellVehicleBack - coords) > 3 then
+                keepGoing = false
+            end
+            Wait(0)
+        end
+    end)
+end
+
 local function sellVehicleWait(price)
     DoScreenFadeOut(250)
     Wait(250)
-    QBCore.Functions.DeleteVehicle(GetVehiclePedIsIn(PlayerPedId()))
+    local vehicle = GetVehiclePedIsIn(PlayerPedId())
+    local plate = QBCore.Functions.GetPlate(vehicle)
+    TriggerServerEvent('Prime-Parking:server:removeOutsideVehicles', plate)
+    QBCore.Functions.DeleteVehicle(vehicle)
     Wait(1500)
     DoScreenFadeIn(250)
-    QBCore.Functions.Notify(Lang:t('success.car_up_for_sale', { value = price }), 'success')
+    QBCore.Functions.Notify('O teu carro foi posto à venda! Preço - $'..price, 'success')
     PlaySound(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0, 0, 1)
 end
 

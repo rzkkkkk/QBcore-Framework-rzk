@@ -352,8 +352,9 @@ RegisterNetEvent('police:client:ImpoundVehicle', function(fullImpound, price)
         local vehpos = GetEntityCoords(vehicle)
         if #(pos - vehpos) < 5.0 and not IsPedInAnyVehicle(ped) then
             local plate = QBCore.Functions.GetPlate(vehicle)
-            TriggerServerEvent("police:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel)
+            TriggerServerEvent("police:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel)			
             QBCore.Functions.DeleteVehicle(vehicle)
+            TriggerServerEvent('Prime-Parking:server:removeOutsideVehicles', plate)
         end
     end
 end)

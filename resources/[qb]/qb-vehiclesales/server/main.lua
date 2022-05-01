@@ -18,6 +18,8 @@ end
 
 -- Callbacks
 
+QBCore.Functions.TriggerCallback('Prime-Parking:server:checkVehicleOwner', function(owned, balance)
+
 QBCore.Functions.CreateCallback('qb-occasions:server:getVehicles', function(source, cb)
     local result = MySQL.Sync.fetchAll('SELECT * FROM occasion_vehicles', {})
     if result[1] then

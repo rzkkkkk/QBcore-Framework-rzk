@@ -530,8 +530,83 @@ local function SetClosestHouse()
             end, ClosestHouse)
         end
     end
-    TriggerEvent('qb-garages:client:setHouseGarage', ClosestHouse, HasHouseKey)
 end
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    TriggerServerEvent('qb-houses:client:setHouses')
+    SetClosestHouse()
+    TriggerEvent('qb-houses:client:setupHouseBlips')
+    if Config.UnownedBlips then TriggerEvent('qb-houses:client:setupHouseBlips2') end
+    Wait(100)
+    TriggerServerEvent("qb-houses:server:setHouses")
+end)
+
+RegisterNetEvent('qb-houses:client:createHouses', function(apartmentnumber, price, tier)
+    local pos = GetEntityCoords(PlayerPedId())
+    local heading = GetEntityHeading(PlayerPedId())
+	local s1, s2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z)
+    local street = GetStreetNameFromHashKey(s1)
+    local coords = {
+        enter 	= { x = pos.x, y = pos.y, z = pos.z, h = heading},
+        cam 	= { x = pos.x, y = pos.y, z = pos.z, h = heading, yaw = -10.00},
+    }
+    street = 'No. ' .. apartmentnumber .. ' ' .. street:gsub('%-', ' ')
+    TriggerServerEvent('qb-houses:server:addNewHouse', street, coords, price, tier)
+    if Config.UnownedBlips then TriggerServerEvent('qb-houses:server:createBlip') end
+end)
+
+RegisterNetEvent('qb-houses:client:addGarage', function()
+    if ClosestHouse ~= nil then
+        local ped = PlayerPedId()
+        if IsPedInAnyVehicle(ped, false) then            
+            local veh = GetVehiclePedIsIn(ped)
+			local vehpos = GetEntityCoords(veh)
+			local x = QBCore.Shared.Round(vehpos.x, 2)
+			local y = QBCore.Shared.Round(vehpos.y, 2)
+			local z = QBCore.Shared.Round(vehpos.z, 2)
+			local heading = GetEntityHeading(veh)
+			local h = QBCore.Shared.Round(heading, 2)
+			local forward, right, up, pos = GetEntityMatrix(veh)
+			local x1 = QBCore.Shared.Round(pos.x + (forward.x * (3.0)) + (right.x * (2.0)), 2)
+			local y1 = QBCore.Shared.Round(pos.y + (forward.y * (3.0)) + (right.y * (2.0)), 2)
+			local x2 = QBCore.Shared.Round(pos.x + (forward.x * (-3.0)) + (right.x * (2.0)), 2)
+			local y2 = QBCore.Shared.Round(pos.y + (forward.y * (-3.0)) + (right.y * (2.0)), 2)
+			local x3 = QBCore.Shared.Round(pos.x + (forward.x * (-3.0)) + (right.x * (-2.0)), 2)
+			local y3 = QBCore.Shared.Round(pos.y + (forward.y * (-3.0)) + (right.y * (-2.0)), 2)
+			local x4 = QBCore.Shared.Round(pos.x + (forward.x * (3.0)) + (right.x * (-2.0)), 2)
+			local y4 = QBCore.Shared.Round(pos.y + (forward.y * (3.0)) + (right.y * (-2.0)), 2)
+            local coords = {
+                x = x,
+				y = y,
+				z = z,
+				h = h,
+				x1 = x1,
+				y1 = y1,
+				x2 = x2,
+				y2 = y2,
+				x3 = x3,
+				y3 = y3,
+				x4 = x4,
+				y4 = y4,
+            }
+            TriggerServerEvent('qb-houses:server:addGarage', ClosestHouse, coords)
+        else
+            QBCore.Functions.Notify("You need to be in the vehicle..", "error")
+        end
+    else
+        QBCore.Functions.Notify("No house around..", "error")
+    end
+end)
+
+CreateThread(function()
+    Wait(1000)
+    TriggerServerEvent('qb-houses:client:setHouses')
+    SetClosestHouse()
+    TriggerEvent('qb-houses:client:setupHouseBlips')
+    if Config.UnownedBlips then TriggerEvent('qb-houses:client:setupHouseBlips2') end
+    Wait(100)
+    TriggerServerEvent("qb-houses:server:setHouses")
+end)
 
 local function setHouseLocations()
     if ClosestHouse ~= nil then

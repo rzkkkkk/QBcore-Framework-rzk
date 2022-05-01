@@ -226,17 +226,18 @@ function GetKeys()
     end)
 end
 
-exports('HasKeys', HasKeys)
-function HasKeys(plate)
-    return KeysList[plate]
+exports('HasVehicleKey', HasVehicleKey)
+local function HasVehicleKey(plate)
+	QBCore.Functions.TriggerCallback('vehiclekeys:server:CheckHasKey', function(result)
+		if result then
+			HasVehicleKey = true
+		else
+			HasVehicleKey = false
+		end
+	end, plate)
+	return HasVehicleKey
 end
-
-function loadAnimDict(dict)
-    while (not HasAnimDictLoaded(dict)) do
-        RequestAnimDict(dict)
-        Wait(0)
-    end
-end
+exports('HasVehicleKey', HasVehicleKey)
 
 function GetVehicleInDirection(coordFromOffset, coordToOffset)
     local ped = PlayerPedId()

@@ -833,11 +833,7 @@ end)
 
 RegisterNUICallback('track-vehicle', function(data, cb)
     local veh = data.veh
-    if findVehFromPlateAndLocate(veh.plate) then
-        QBCore.Functions.Notify("Your vehicle has been marked", "success")
-    else
-        QBCore.Functions.Notify("This vehicle cannot be located", "error")
-    end
+    TriggerEvent('Prime-Parking:client:trackVehicle', veh.plate)
 end)
 
 RegisterNUICallback('DeleteContact', function(data, cb)
