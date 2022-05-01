@@ -758,7 +758,7 @@ RegisterNetEvent('Prime-Parking:client:updateRadialmenu', function()
 	if inGarageStation and currentgarage ~= nil and not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() and not IsPedInAnyVehicle(ped, false) then
 		exports["qb-radialmenu"]:addSubMenu(4, 'opengarage', {
 			id = 'opengarage',
-			title = 'Open Garages',
+			title = 'Abrir Garagem',
 			icon = 'car',
 			type = 'client',
 			event = 'Prime-Parking:client:openGarage',
@@ -771,7 +771,7 @@ RegisterNetEvent('Prime-Parking:client:updateRadialmenu', function()
 	if inGarageStation and currentgarage ~= nil and not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() and IsPedInAnyVehicle(ped, false) and Garages[currentgarage].canStoreVehicle and exports["qb-vehiclekeys"]:HasKey(plate) then
 		exports["qb-radialmenu"]:addSubMenu(4, 'storevehicle', {
 			id = 'storevehicle',
-			title = 'Store Vehicle',
+			title = 'Guardar Veículo',
 			icon = 'car',
 			type = 'client',
 			event = 'Prime-Parking:client:storeVehicle',
@@ -785,7 +785,7 @@ RegisterNetEvent('Prime-Parking:client:updateRadialmenu', function()
 		if inGarageStation and currentgarage ~= nil and not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() and PlayerData.job.onduty and inJobStation[PlayerData.job.name] and lastjobveh == nil and not IsPedInAnyVehicle(ped) then
 			exports["qb-radialmenu"]:addJobSubMenu(PlayerData.job.name, PlayerData.job.name .. 'opengarage', {
 				id = PlayerData.job.name .. 'opengarage',
-				title = 'Open Garages',
+				title = 'Abrir Garagem',
 				icon = 'car',
 				type = 'client',
 				event = 'Prime-Parking:client:openJobVehList',
@@ -797,7 +797,7 @@ RegisterNetEvent('Prime-Parking:client:updateRadialmenu', function()
 		if inGarageStation and currentgarage ~= nil and not PlayerData.metadata['ishandcuffed'] and not PlayerData.metadata['inlaststand'] and not PlayerData.metadata['isdead'] and not IsPauseMenuActive() and PlayerData.job.onduty and inJobStation[PlayerData.job.name] and lastjobveh == veh and exports["qb-vehiclekeys"]:HasKey(plate) then
 			exports["qb-radialmenu"]:addJobSubMenu(PlayerData.job.name, PlayerData.job.name .. 'storevehicle', {
 				id = PlayerData.job.name .. 'storevehicle',
-				title = 'Store Vehicle',
+				title = 'Guardar Veículo',
 				icon = 'car',
 				type = 'client',
 				event = 'Prime-Parking:client:HideJobVeh',

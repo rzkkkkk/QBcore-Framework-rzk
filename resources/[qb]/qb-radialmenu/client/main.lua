@@ -197,6 +197,68 @@ local function setRadialState(bool, sendMessage, delay)
     inRadialMenu = bool
 end
 
+
+local function CheckHasID(id1, id2)
+	local has = false
+	if Config.MenuItems[id1].items then
+		for k, v in pairs(Config.MenuItems[id1].items) do
+			if v.id == id2 then
+				has = true
+			end
+		end
+	end
+	return has
+end
+
+local function CheckHasID2(job, id)
+	local has = false
+	if Config.JobInteractions[job] then
+		for k, v in pairs(Config.JobInteractions[job]) do
+			if v.id == id then
+				has = true
+			end
+		end
+	end
+	return has
+end
+
+local function addSubMenu(id1, id2, menu)
+	if Config.MenuItems[id1].items and not CheckHasID(id1, id2) then
+		Config.MenuItems[id1].items[#Config.MenuItems[id1].items + 1] = menu
+	end
+end
+
+local function addJobSubMenu(job, id, menu)
+	if Config.JobInteractions[job] and not CheckHasID2(job, id) then
+		Config.JobInteractions[job][#Config.JobInteractions[job] +1 ] =  menu
+	end
+end
+
+local function removeSubMenu(id1, id2)
+	if Config.MenuItems[id1].items and CheckHasID(id1, id2) then
+		for k, v in pairs(Config.MenuItems[id1].items) do
+			if v.id == id2 then
+				Config.MenuItems[id1].items[k] = nil
+			end
+		end
+	end
+end
+
+local function removeJobSubMenu(job, id)
+	if Config.JobInteractions[job] and CheckHasID2(job, id) then
+		for k, v in pairs(Config.JobInteractions[job]) do
+			if v.id == id then
+				Config.JobInteractions[job][k] = nil
+			end
+		end
+	end
+end
+
+exports('addSubMenu', addSubMenu)
+exports('addJobSubMenu', addJobSubMenu)
+exports('removeSubMenu', removeSubMenu)
+exports('removeJobSubMenu', removeJobSubMenu)
+
 -- Command
 
 RegisterCommand('radialmenu', function()
@@ -213,16 +275,19 @@ RegisterKeyMapping('radialmenu', Lang:t("general.command_description"), 'keyboar
 -- Sets the metadata when the player spawns
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     PlayerData = QBCore.Functions.GetPlayerData()
+	TriggerEvent('Prime-Parking:client:updateRadialmenu')
 end)
 
 -- Sets the playerdata to an empty table when the player has quit or did /logout
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     PlayerData = {}
+	TriggerEvent('Prime-Parking:client:updateRadialmenu')
 end)
 
 -- This will update all the PlayerData that doesn't get updated with a specific event other than this like the metadata
 RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
     PlayerData = val
+	TriggerEvent('Prime-Parking:client:updateRadialmenu')
 end)
 
 RegisterNetEvent('qb-radialmenu:client:noPlayers', function()
@@ -324,6 +389,7 @@ RegisterNetEvent('qb-radialmenu:client:ChangeSeat', function(data)
         QBCore.Functions.Notify(Lang:t("error.race_harness_on"), 'error')
     end
 end)
+
 
 -- NUI Callbacks
 
