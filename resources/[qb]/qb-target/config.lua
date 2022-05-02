@@ -78,6 +78,23 @@ Config.GlobalPlayerOptions = {
 
 Config.Peds = {
 
+	------DPLS----
+	["DPLS"] = {
+		models = {
+			`ig_trafficwarden`,
+   
+		},
+		options = {
+			{
+				type = "client",
+				event = "garage:menu",
+				parameters = {},
+				icon = "fas fa-car",
+				label = "Garagem DPLS",
+			},
+		},
+		distance = 2.5
+	},
 }
 
 ----------------------------------------------------------------------------------------
