@@ -1,46 +1,46 @@
-## Preview
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154784761-d9e1a3de-3f34-47dc-afc2-0aecb6d17042.png"/>
-</div>
+![LJ Loading](https://user-images.githubusercontent.com/91661118/141086857-aa234017-dc3a-4a73-ba7d-950e8201465e.png)
 
+# lj-loading used with QBCore Framework
+Join my Discord laboratory for updates, support, and special early testing!
+<br>
+https://discord.gg/loljoshie (without-vanity url: https://discord.gg/HH6uTcBfew)
+
+Simple loading screen styled like NP 3.0, this is for those that edit their own videos. It's very simple. 
+<br>
+Runs at ~ 0.00 ms if you have more optimization suggestions feel free to reach out
 <br>
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/91661118/154891228-1fffbd8c-8b07-4175-bd25-fbfbd7e3ed38.gif)
+# Installation
 
-<br>
+* **IMPORTANT: If you plan on importing a YouTube video you converted from a third party website. There are known issues with HTML video tags not displaying them correctly.**
+* **IMPORTANT: Make sure you rename your logo and video in "assets" folder to match with HTML file.**
 
-## Key Features
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154636617-a2ad4c09-4b60-4438-832a-ed1c505b52ea.png"/>
-</div>
+# Key Features
+* It loads
+* Changeable logo 
+* Changeable video background overlay
+* Configurable loading bar
+* Configurable separate audio
+* Styled like NP 3.0
+#
+https://user-images.githubusercontent.com/91661118/135742930-6dcc4a86-bfc8-4b50-838d-e4ae49655baf.mp4
 
-* #### Bridge does not show while loading into server
-* #### Choose between an image carousel or video parallax
-* #### With ease customization with comments throughout instructions/information
-* #### Unique dialog menus and carousel texts
-* #### Unique default keybind carousel
-* #### Video pause and unpause toggle switch
-* #### Audio pause and unpause toggle switch
-* #### Autoplay carousel images toggle switch
+* CSS Color Gradient Overlay Generator: https://cssgradient.io/
 
-<br>
+# Change Logs
 
-## Change to Carousel or Video
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154641230-17b3da6f-e731-472c-8447-d280d2d28c82.png"/>
-</div>
+### 1.3
+* Added loading bar
+* Added audio option
+* Clean up overall
 
-* #### Simply locate the HTML file found in: "html/index.html" exactly as shown underneath 
+### 1.2
+* Added new practices for fxmanifest
+* Clean up overall
 
-![msedge_JyZqs9qYOF](https://user-images.githubusercontent.com/91661118/154891153-7b8a9e0b-5d89-460f-af4b-409e5105c229.gif)
+### 1.0
+* Initial release
 
-<br>
-
-## Change Language
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154641827-fd6d3ced-9d9c-43fb-9b20-440d7ff562b0.png"/>
-</div>
-
-* #### Simply locate the Javascript file found in: "html/app.js" exactly as shown underneath
-![msedge_KLht2xu4CO](https://user-images.githubusercontent.com/91661118/154890941-5bc9db8f-6f15-4cb0-a7b3-1aa60a7d0824.gif)
+# Issues and Suggestions
+Please use the GitHub issues system to report issues or make suggestions, when making suggestion, please keep [Suggestion] in the title to make it clear that it is a suggestion.
 
