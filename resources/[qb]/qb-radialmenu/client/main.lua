@@ -197,7 +197,6 @@ local function setRadialState(bool, sendMessage, delay)
     inRadialMenu = bool
 end
 
-
 local function CheckHasID(id1, id2)
 	local has = false
 	if Config.MenuItems[id1].items then
@@ -253,11 +252,6 @@ local function removeJobSubMenu(job, id)
 		end
 	end
 end
-
-exports('addSubMenu', addSubMenu)
-exports('addJobSubMenu', addJobSubMenu)
-exports('removeSubMenu', removeSubMenu)
-exports('removeJobSubMenu', removeJobSubMenu)
 
 -- Command
 
@@ -390,7 +384,6 @@ RegisterNetEvent('qb-radialmenu:client:ChangeSeat', function(data)
     end
 end)
 
-
 -- NUI Callbacks
 
 RegisterNUICallback('closeRadial', function(data)
@@ -416,5 +409,10 @@ RegisterNUICallback('selectItem', function(data)
     end
 end)
 
+
+exports('addSubMenu', addSubMenu)
+exports('addJobSubMenu', addJobSubMenu)
+exports('removeSubMenu', removeSubMenu)
+exports('removeJobSubMenu', removeJobSubMenu)
 exports('AddOption', AddOption)
 exports('RemoveOption', RemoveOption)
