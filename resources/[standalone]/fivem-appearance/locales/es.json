@@ -1,0 +1,128 @@
+{
+    "modal": {
+      "save": {
+        "title": "Guardar cambios",
+        "description": ""
+      },
+      "exit": {
+        "title": "No guardar",
+        "description": "Los cambios no se guardaran"
+      },
+      "accept": "Si",
+      "decline": "No"
+    },
+    "ped": {
+      "title": "Ped",
+      "model": "Modelo"
+    },
+    "headBlend": {
+      "title": "Padres",
+      "shape": {
+        "title": "Cara",
+        "firstOption": "Padre",
+        "secondOption": "Madre",
+        "mix": "Mix"
+      },
+      "skin": {
+        "title": "Piel",
+        "firstOption": "Padre",
+        "secondOption": "Madre",
+        "mix": "Mix"
+      }
+    },
+    "faceFeatures": {
+      "title": "Características de la cara",
+      "nose": {
+        "title": "Nariz",
+        "width": "Ancho",
+        "height": "Altura",
+        "size": "Tamaño",
+        "boneHeight": "Altura de hueso",
+        "boneTwist": "Torsión",
+        "peakHeight": "Altura de la punta"
+      },
+      "eyebrows": {
+        "title": "Cejas",
+        "height": "Altura",
+        "depth": "Profundidad"
+      },
+      "cheeks": {
+        "title": "Mejillas",
+        "boneHeight": "Altura de hueso",
+        "boneWidth": "Ancho de hueso",
+        "width": "Ancho"
+      },
+      "eyesAndMouth": {
+        "title": "Ojos y boca",
+        "eyesOpening": "Apertura de ojos",
+        "lipsThickness": "Espesor del labio"
+      },
+      "jaw": {
+        "title": "Mandíbula",
+        "width": "Ancho",
+        "size": "Tamaño"
+      },
+      "chin": {
+        "title": "Barbilla",
+        "lowering": "Encapotada",
+        "length": "Longitud",
+        "size": "Tamaño",
+        "hole": "Tamaño del agujero"
+      },
+      "neck": {
+        "title": "Cuello",
+        "thickness": "Grosor"
+      }
+    },
+    "headOverlays": {
+      "title": "Apariencia",
+      "hair": {
+        "title": "Cabello",
+        "style": "Estilo",
+        "color": "Color",
+        "highlight": "Color 2"
+      },
+      "opacity": "Opacidad",
+      "style": "Estilo",
+      "color": "Color",
+      "blemishes": "Manchas",
+      "beard": "Barba",
+      "eyebrows": "Cejas",
+      "ageing": "Envejecimiento",
+      "makeUp": "Maquillaje",
+      "blush": "Rubor",
+      "complexion": "Complexion",
+      "sunDamage": "daño del sol",
+      "lipstick": "Lápiz labial",
+      "moleAndFreckles": "Mole y pecas",
+      "chestHair": "Pelo en el pecho",
+      "bodyBlemishes": "Manchas del cuerpo",
+      "eyeColor": "Color de los ojos"
+    },
+    "components": {
+      "title": "Ropa",
+      "drawable": "Modelo",
+      "texture": "Textura",
+      "mask": "Máscara",
+      "upperBody": "Torso",
+      "lowerBody": "Pantalones",
+      "bags": "Mochilas",
+      "shoes": "Zapatos",
+      "scarfAndChains": "Bufandas y cadenas",
+      "shirt": "Camisas",
+      "bodyArmor": "Chalecos",
+      "decals": "Calcomanias",
+      "jackets": "Chaquetas"
+    },
+    "props": {
+      "title": "Accesorios",
+      "drawable": "Modelo",
+      "texture": "Textura",
+      "hats": "Sombreros y cascos",
+      "glasses": "Gafas",
+      "ear": "Oreja",
+      "watches": "Relojes",
+      "bracelets": "Accesorios de la muñeca"
+    }
+  }
+  
