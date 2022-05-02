@@ -20,11 +20,12 @@ setr voice_defaultVolume 0.3
 setr voice_enableRadioAnim 1
 setr voice_syncData 1
 
-# QBCore locale config
-setr qb_locale "en"
 
+# QBCore locale config
+setr qb_locale "pt"
+setr fivem-appearance:locale "pt-BR"
 # QBCore UseTarget
-setr UseTarget false
+setr UseTarget true
 
 # These resources will start by default.
 ensure mapmanager
@@ -67,13 +68,13 @@ sets locale "root-AQ"
 #sets banner_connecting "https://url.to/image.png"
 
 # Set your server's hostname. This is not usually shown anywhere in listings.
-sv_hostname "NEON built with QBCore Framework by JericoFx & Kakarot & Hamy"
+sv_hostname "NEON 2.0"
 
 # Set your server's Project Name
-sets sv_projectName "[QBCore Framework] NEON"
+sets sv_projectName "NEON 2.0 | discord.gg/neoncity"
 
 # Set your server's Project Description
-sets sv_projectDesc "An advanced FiveM RP framework including jobs, gangs, housing & more!"
+sets sv_projectDesc "RP Sério | Desenvolvimento diário | RP de qualidade"
 
 # Nested configs!
 #exec server_internal.cfg
@@ -101,20 +102,21 @@ add_principal qbcore.god group.admin # Error proof
 add_principal qbcore.god qbcore.admin # Allow gods access to admin commands
 add_principal qbcore.admin qbcore.mod # Allow admins access to mod commands
 #add_principal identifier.{{principalMasterIdentifier}} qbcore.god <- doesn't exist yet, change the generated one below to qbcore.god
-add_principal identifier.fivem:823996 group.admin #rzk1998
-
+add_principal identifier.steam:11000010d492e07 group.admin #rzk1998
+add_principal identifier.steam:11000010d492e07 qbcore.god #rzk1998
+add_principal identifier.steam:11000010d492e07 qbcore.dev #rzk1998
 # enable OneSync (required for server-side state awareness)
 set onesync on
 
 # Game Build
-set sv_enforceGameBuild 2372
+set sv_enforceGameBuild 2545
 
 # Server player slot limit (see https://fivem.net/server-hosting for limits)
-sv_maxclients 48
+sv_maxclients 12
 
 # Steam Web API key, if you want to use Steam authentication (https://steamcommunity.com/dev/apikey)
 # -> replace "" with the key
-set steam_webApiKey "none"
+set steam_webApiKey "97B61B093E63949C7B01F9F7D89B4B16"
 
 # License key for your server (https://keymaster.fivem.net)
 sv_licenseKey "sisdgzg0qoebu6b4e4rhsy2ku4gzne6r"
