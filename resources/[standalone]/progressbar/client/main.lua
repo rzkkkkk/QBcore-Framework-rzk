@@ -41,7 +41,8 @@ local prop_net = nil
 local propTwo_net = nil
 local runProgThread = false
 
-RegisterNetEvent('progressbar:client:ToggleBusyness', function(bool)
+RegisterNetEvent('progressbar:client:ToggleBusyness')
+AddEventHandler('progressbar:client:ToggleBusyness', function(bool)
     isDoingAction = bool
 end)
 
@@ -78,12 +79,12 @@ function Process(action, start, tick, finish)
                 label = Action.label
             })
 
-            CreateThread(function ()
+            Citizen.CreateThread(function ()
                 if start ~= nil then
                     start()
                 end
                 while isDoingAction do
-                    Wait(1)
+                    Citizen.Wait(1)
                     if tick ~= nil then
                         tick()
                     end
@@ -110,7 +111,7 @@ end
 function ActionStart()
     runProgThread = true
     LocalPlayer.state:set("inv_busy", true, true) -- Busy
-    CreateThread(function()
+    Citizen.CreateThread(function()
         while runProgThread do
             if isDoingAction then
                 if not isAnim then
@@ -139,7 +140,7 @@ function ActionStart()
                     RequestModel(Action.prop.model)
 
                     while not HasModelLoaded(GetHashKey(Action.prop.model)) do
-                        Wait(0)
+                        Citizen.Wait(0)
                     end
 
                     local pCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0)
@@ -170,7 +171,7 @@ function ActionStart()
                         RequestModel(Action.propTwo.model)
 
                         while not HasModelLoaded(GetHashKey(Action.propTwo.model)) do
-                            Wait(0)
+                            Citizen.Wait(0)
                         end
 
                         local pCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0)
@@ -201,7 +202,7 @@ function ActionStart()
 
                 DisableActions(ped)
             end
-            Wait(0)
+            Citizen.Wait(0)
         end
     end)
 end
@@ -247,7 +248,7 @@ end
 function loadAnimDict(dict)
 	while (not HasAnimDictLoaded(dict)) do
 		RequestAnimDict(dict)
-		Wait(5)
+		Citizen.Wait(5)
 	end
 end
 
@@ -290,23 +291,28 @@ function DisableActions(ped)
     end
 end
 
-RegisterNetEvent('progressbar:client:progress', function(action, finish)
+RegisterNetEvent("progressbar:client:progress")
+AddEventHandler("progressbar:client:progress", function(action, finish)
 	Process(action, nil, nil, finish)
 end)
 
-RegisterNetEvent('progressbar:client:ProgressWithStartEvent', function(action, start, finish)
+RegisterNetEvent("progressbar:client:ProgressWithStartEvent")
+AddEventHandler("progressbar:client:ProgressWithStartEvent", function(action, start, finish)
 	Process(action, start, nil, finish)
 end)
 
-RegisterNetEvent('progressbar:client:ProgressWithTickEvent', function(action, tick, finish)
+RegisterNetEvent("progressbar:client:ProgressWithTickEvent")
+AddEventHandler("progressbar:client:ProgressWithTickEvent", function(action, tick, finish)
 	Process(action, nil, tick, finish)
 end)
 
-RegisterNetEvent('progressbar:client:ProgressWithStartAndTick', function(action, start, tick, finish)
+RegisterNetEvent("progressbar:client:ProgressWithStartAndTick")
+AddEventHandler("progressbar:client:ProgressWithStartAndTick", function(action, start, tick, finish)
 	Process(action, start, tick, finish)
 end)
 
-RegisterNetEvent('progressbar:client:cancel', function()
+RegisterNetEvent("progressbar:client:cancel")
+AddEventHandler("progressbar:client:cancel", function()
 	Cancel()
 end)
 

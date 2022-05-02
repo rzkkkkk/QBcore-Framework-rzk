@@ -1,4 +1,8 @@
-# qb-target
+![qbtarget edit](https://user-images.githubusercontent.com/91661118/145321440-bcbe4cb8-7a9b-4922-868b-5181ee593b42.png)
+
+Modified version of qb-target bringing the most accurate NoPixel 3.0 style possible
+
+![qb-target](https://user-images.githubusercontent.com/91661118/145322394-da0f5905-bbe7-412e-9249-e9d9e6a0b74d.png)
 
 qb-target is a targeting solution that allows interaction with any predefined entity, model, entity type or polyzone. While activated you can easily and safely replace markers and distance checking, instead relying on intuitive design to improve player experiences and optimize interaction.
 
@@ -32,9 +36,12 @@ The TEMPLATES.md and EXAMPLES.md are always being improved and new examples can 
 - Add generic options to apply for all players, peds, vehicles, or objects
 - Trigger an event, function or command after clicking an option, with the ability to pass any data through
 - Define distance on a per-option or overall basis when triggering a target option
-- Ability to redefine or remove options and add new options without replacing old ones
-- Update the option list when moving towards or away from a target with variable distances on their options
-- Support for entity bones, with built-in tables for opening vehicle doors
+- Ability to redefine or remove options, and add new options without replacing old ones
+- Update option list when moving towards or away from a target with variable distances on their options
+- Support for entity bones, with builtin tables for opening doors
 - Support checking for job, gang, citizenid, items, or specific entities
 - Utilise the `canInteract` function for advanced checks to show or hide an option based on any trigger
 - Ped spawner to spawn peds and assign target options to them all in one place
+
+## Issues and Suggestions
+Please use the GitHub issues system to report issues or make suggestions, when making suggestion, please keep `[Suggestion]` in the title to make it clear that it is a suggestion or join the [discord](https://discord.gg/qbcore).

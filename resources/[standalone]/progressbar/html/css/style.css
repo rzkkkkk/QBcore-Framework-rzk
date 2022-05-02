@@ -11,20 +11,21 @@ body {
     overflow: hidden;
     height: 100%;
     width: 100%;
+
 }
 
 .progress-container {
     display: none;
     z-index: 5;
     color: #fff;
-    font-family: 'Poppins', sans-serif;
-    width: 15%;
+    width:15%;
     position: fixed;
     bottom: 12.65%;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid #E6E6E5;
 }
 
 .progress-labels {
@@ -35,22 +36,30 @@ body {
     position: absolute;
     display: inline-block;
     white-space: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.7px;
+    font-weight: 600;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+    text-shadow: 1px 1px 1px rgba(1,1,1,1);
 }
 
 .progress-labels div {
-    font-size: 1.3vh;
-    line-height: 4vh;
+    font-size: 16px;
+    line-height: 3.5vh;
     position: relative;
     color: #ffffff;
     z-index: 10;
     font-weight: bold;
-    font-family: 'Poppins', sans-serif;
+    font-variant: small-caps;
 }
 
 .progress-bar-container {
     width: 100%;
-    height: 4vh;
-    background: rgba(0, 0, 0, 0.246);
+    height: 3.5vh;
+    background: rgba(0, 0, 0, 0.251);
     text-align: left;
     overflow: hidden;
     position: relative;
@@ -60,8 +69,8 @@ body {
 }
 
 .progress-bar {
-    background-color: #dc143c !important;
-    width: 0%;
+    background-color: #5590d8!important;
+    width: 80%;
     height: 4vh;
     transition: width 0.3s;
     transition-timing-function: ease-out;
