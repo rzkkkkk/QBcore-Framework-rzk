@@ -5,87 +5,87 @@ Config.EnableExtraMenu = true
 Config.MenuItems = {
     [1] = {
         id = 'citizen',
-        title = 'Citizen',
+        title = 'Civil',
         icon = 'user',
         items = {
             {
                 id = 'givenum',
-                title = 'Give Contact Details',
+                title = 'Dar contacto',
                 icon = 'address-book',
                 type = 'client',
                 event = 'qb-phone:client:GiveContactDetails',
                 shouldClose = true
             }, {
                 id = 'getintrunk',
-                title = 'Get In Trunk',
+                title = 'Entrar na mala',
                 icon = 'car',
                 type = 'client',
                 event = 'qb-trunk:client:GetIn',
                 shouldClose = true
             }, {
                 id = 'cornerselling',
-                title = 'Corner Selling',
+                title = 'Vender na Esquina',
                 icon = 'cannabis',
                 type = 'client',
                 event = 'qb-drugs:client:cornerselling',
                 shouldClose = true
             }, {
                 id = 'togglehotdogsell',
-                title = 'Hotdog Selling',
+                title = 'Vender Cachorros',
                 icon = 'hotdog',
                 type = 'client',
                 event = 'qb-hotdogjob:client:ToggleSell',
                 shouldClose = true
             }, {
                 id = 'interactions',
-                title = 'Interaction',
+                title = 'Interação',
                 icon = 'exclamation-triangle',
                 items = {
                     {
                         id = 'handcuff',
-                        title = 'Cuff',
+                        title = 'Algemar',
                         icon = 'user-lock',
                         type = 'client',
                         event = 'police:client:CuffPlayerSoft',
                         shouldClose = true
                     }, {
                         id = 'playerinvehicle',
-                        title = 'Put In Vehicle',
+                        title = 'Colocar no Veículo',
                         icon = 'car-side',
                         type = 'client',
                         event = 'police:client:PutPlayerInVehicle',
                         shouldClose = true
                     }, {
                         id = 'playeroutvehicle',
-                        title = 'Take Out Of Vehicle',
+                        title = 'Retirar no Veículo',
                         icon = 'car-side',
                         type = 'client',
                         event = 'police:client:SetPlayerOutVehicle',
                         shouldClose = true
                     }, {
                         id = 'stealplayer',
-                        title = 'Rob',
+                        title = 'Roubar',
                         icon = 'mask',
                         type = 'client',
                         event = 'police:client:RobPlayer',
                         shouldClose = true
                     }, {
                         id = 'escort',
-                        title = 'Kidnap',
+                        title = 'Raptar',
                         icon = 'user-friends',
                         type = 'client',
                         event = 'police:client:KidnapPlayer',
                         shouldClose = true
                     }, {
                         id = 'escort2',
-                        title = 'Escort',
+                        title = 'Escoltar',
                         icon = 'user-friends',
                         type = 'client',
                         event = 'police:client:EscortPlayer',
                         shouldClose = true
                     }, {
                         id = 'escort554',
-                        title = 'Hostage',
+                        title = 'Refém',
                         icon = 'child',
                         type = 'client',
                         event = 'A5:Client:TakeHostage',
@@ -97,17 +97,17 @@ Config.MenuItems = {
     },
     [2] = {
         id = 'general',
-        title = 'General',
+        title = 'Geral',
         icon = 'list-alt',
         items = {
             {
                 id = 'house',
-                title = 'House Interaction',
+                title = 'Casa',
                 icon = 'home',
                 items = {
                     {
                         id = 'givehousekey',
-                        title = 'Give House Keys',
+                        title = 'Dar Chaves de Casa',
                         icon = 'key',
                         type = 'client',
                         event = 'qb-houses:client:giveHouseKey',
@@ -115,7 +115,7 @@ Config.MenuItems = {
                         items = {}
                     }, {
                         id = 'removehousekey',
-                        title = 'Remove House Keys',
+                        title = 'Remover Chaves de Casa',
                         icon = 'key',
                         type = 'client',
                         event = 'qb-houses:client:removeHouseKey',
@@ -123,21 +123,21 @@ Config.MenuItems = {
                         items = {}
                     }, {
                         id = 'togglelock',
-                        title = 'Toggle Doorlock',
+                        title = 'Fechadura',
                         icon = 'door-closed',
                         type = 'client',
                         event = 'qb-houses:client:toggleDoorlock',
                         shouldClose = true
                     }, {
                         id = 'decoratehouse',
-                        title = 'Decorate House',
+                        title = 'Decorar Casa',
                         icon = 'boxes',
                         type = 'client',
                         event = 'qb-houses:client:decorate',
                         shouldClose = true
                     }, {
                         id = 'houseLocations',
-                        title = 'Interaction Locations',
+                        title = 'Locais de Interação',
                         icon = 'home',
                         items = {
                             {
@@ -458,38 +458,62 @@ Config.JobInteractions = {
     ["ambulance"] = {
         {
             id = 'statuscheck',
-            title = 'Check Health Status',
+            title = 'Verificar estado vital',
             icon = 'heartbeat',
             type = 'client',
             event = 'hospital:client:CheckStatus',
             shouldClose = true
         },{
             id = 'revivep',
-            title = 'Revive',
+            title = 'Reviver',
             icon = 'user-md',
             type = 'client',
             event = 'hospital:client:RevivePlayer',
             shouldClose = true
         },{
             id = 'treatwounds',
-            title = 'Heal wounds',
+            title = 'Curar Feridas',
             icon = 'band-aid',
             type = 'client',
             event = 'hospital:client:TreatWounds',
             shouldClose = true
         }, {
             id = 'emergencybutton2',
-            title = 'Emergency button',
+            title = '10-99',
             icon = 'bell',
             type = 'client',
             event = 'police:client:SendPoliceEmergencyAlert',
             shouldClose = true
         }, {
             id = 'escort',
-            title = 'Escort',
+            title = 'Escoltar',
             icon = 'user-friends',
             type = 'client',
             event = 'police:client:EscortPlayer',
+            shouldClose = true
+        },
+        {
+            id = 'joinradio1',
+            title = 'Rádio DPLS',
+            icon = 'info-circle',
+            type = 'client',
+            event = 'qb-radio:client:JoinRadioChannel1',
+            shouldClose = true
+        },
+        {
+            id = 'joinradio2',
+            title = 'Rádio GTI',
+            icon = 'info-circle',
+            type = 'client',
+            event = 'qb-radio:client:JoinRadioChannel2',
+            shouldClose = true
+        },
+        {
+            id = 'joinradio3',
+            title = 'Rádio EMS',
+            icon = 'info-circle',
+            type = 'client',
+            event = 'qb-radio:client:JoinRadioChannel3',
             shouldClose = true
         }, {
             id = 'stretcheroptions',
@@ -498,14 +522,14 @@ Config.JobInteractions = {
             items = {
                 {
                     id = 'spawnstretcher',
-                    title = 'Spawn Stretcher',
+                    title = 'Adicionar Maca',
                     icon = 'plus',
                     type = 'client',
                     event = 'qb-radialmenu:client:TakeStretcher',
                     shouldClose = false
                 }, {
                     id = 'despawnstretcher',
-                    title = 'Remove Stretcher',
+                    title = 'Remover Maca',
                     icon = 'minus',
                     type = 'client',
                     event = 'qb-radialmenu:client:RemoveStretcher',
@@ -517,21 +541,21 @@ Config.JobInteractions = {
     ["taxi"] = {
         {
             id = 'togglemeter',
-            title = 'Show/Hide Meter',
+            title = 'Mostrar/Esconder Taxímetro',
             icon = 'eye-slash',
             type = 'client',
             event = 'qb-taxi:client:toggleMeter',
             shouldClose = false
         }, {
             id = 'togglemouse',
-            title = 'Start/Stop Meter',
+            title = 'Começar/Parar Taxímetro',
             icon = 'hourglass-start',
             type = 'client',
             event = 'qb-taxi:client:enableMeter',
             shouldClose = true
         }, {
             id = 'npc_mission',
-            title = 'NPC Mission',
+            title = 'Missão',
             icon = 'taxi',
             type = 'client',
             event = 'qb-taxi:client:DoTaxiNpc',
@@ -541,14 +565,14 @@ Config.JobInteractions = {
     ["tow"] = {
         {
             id = 'togglenpc',
-            title = 'Toggle NPC',
+            title = 'Missão',
             icon = 'toggle-on',
             type = 'client',
             event = 'jobs:client:ToggleNpc',
             shouldClose = true
         }, {
             id = 'towvehicle',
-            title = 'Tow vehicle',
+            title = 'Rebocar Veículo',
             icon = 'truck-pickup',
             type = 'client',
             event = 'qb-tow:client:TowVehicle',
@@ -558,7 +582,7 @@ Config.JobInteractions = {
     ["mechanic"] = {
         {
             id = 'towvehicle',
-            title = 'Tow vehicle',
+            title = 'Rebocar Veículo',
             icon = 'truck-pickup',
             type = 'client',
             event = 'qb-tow:client:TowVehicle',
@@ -568,68 +592,85 @@ Config.JobInteractions = {
     ["police"] = {
         {
             id = 'emergencybutton',
-            title = 'Emergency button',
+            title = '10-99',
             icon = 'bell',
             type = 'client',
             event = 'police:client:SendPoliceEmergencyAlert',
             shouldClose = true
         }, {
             id = 'checkvehstatus',
-            title = 'Check Tune Status',
+            title = 'Verificar Tune',
             icon = 'info-circle',
             type = 'client',
             event = 'qb-tunerchip:client:TuneStatus',
             shouldClose = true
         }, {
             id = 'resethouse',
-            title = 'Reset house lock',
+            title = 'Trancar Casa',
             icon = 'key',
             type = 'client',
             event = 'qb-houses:client:ResetHouse',
             shouldClose = true
-        }, {
-            id = 'takedriverlicense',
-            title = 'Revoke Drivers License',
-            icon = 'id-card',
+        },
+        {
+            id = 'joinradio1',
+            title = 'Rádio DPLS',
+            icon = 'info-circle',
             type = 'client',
-            event = 'police:client:SeizeDriverLicense',
+            event = 'qb-radio:client:JoinRadioChannel1',
             shouldClose = true
-        }, {
+        },
+        {
+            id = 'joinradio2',
+            title = 'Rádio GTI',
+            icon = 'info-circle',
+            type = 'client',
+            event = 'qb-radio:client:JoinRadioChannel2',
+            shouldClose = true
+        },
+        {
+            id = 'joinradio3',
+            title = 'Rádio EMS',
+            icon = 'info-circle',
+            type = 'client',
+            event = 'qb-radio:client:JoinRadioChannel3',
+            shouldClose = true
+        },   {
             id = 'policeinteraction',
-            title = 'Police Actions',
+            title = 'Ações',
             icon = 'tasks',
             items = {
                 {
                     id = 'statuscheck',
-                    title = 'Check Health Status',
+                    title = 'Verificar Sinais Vitais',
                     icon = 'heartbeat',
                     type = 'client',
                     event = 'hospital:client:CheckStatus',
                     shouldClose = true
                 }, {
                     id = 'checkstatus',
-                    title = 'Check status',
+                    title = 'Verificar Estado',
                     icon = 'question',
                     type = 'client',
                     event = 'police:client:CheckStatus',
                     shouldClose = true
                 }, {
                     id = 'escort',
-                    title = 'Escort',
+                    title = 'Escoltar',
                     icon = 'user-friends',
                     type = 'client',
                     event = 'police:client:EscortPlayer',
                     shouldClose = true
                 }, {
                     id = 'searchplayer',
-                    title = 'Search',
+                    title = 'Revistar',
                     icon = 'search',
                     type = 'client',
                     event = 'police:client:SearchPlayer',
                     shouldClose = true
                 }, {
                     id = 'jailplayer',
-                    title = 'Jail',
+                    title = 'Prender',
                     icon = 'user-lock',
                     type = 'client',
                     event = 'police:client:JailPlayer',
@@ -638,7 +679,7 @@ Config.JobInteractions = {
             }
         }, {
             id = 'policeobjects',
-            title = 'Objects',
+            title = 'Objetos',
             icon = 'road',
             items = {
                 {
@@ -650,42 +691,35 @@ Config.JobInteractions = {
                     shouldClose = false
                 }, {
                     id = 'spawnhek',
-                    title = 'Gate',
+                    title = 'Barreira',
                     icon = 'torii-gate',
                     type = 'client',
                     event = 'police:client:spawnBarrier',
                     shouldClose = false
                 }, {
-                    id = 'spawnschotten',
-                    title = 'Speed Limit Sign',
-                    icon = 'sign',
-                    type = 'client',
-                    event = 'police:client:spawnRoadSign',
-                    shouldClose = false
-                }, {
                     id = 'spawntent',
-                    title = 'Tent',
+                    title = 'Tenda',
                     icon = 'campground',
                     type = 'client',
                     event = 'police:client:spawnTent',
                     shouldClose = false
                 }, {
                     id = 'spawnverlichting',
-                    title = 'Lighting',
+                    title = 'Luz',
                     icon = 'lightbulb',
                     type = 'client',
                     event = 'police:client:spawnLight',
                     shouldClose = false
                 }, {
                     id = 'spikestrip',
-                    title = 'Spike Strips',
+                    title = 'Spikes',
                     icon = 'caret-up',
                     type = 'client',
                     event = 'police:client:SpawnSpikeStrip',
                     shouldClose = false
                 }, {
                     id = 'deleteobject',
-                    title = 'Remove object',
+                    title = 'Remover objetos',
                     icon = 'trash',
                     type = 'client',
                     event = 'police:client:deleteObject',
