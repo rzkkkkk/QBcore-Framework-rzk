@@ -36,19 +36,28 @@ local function skyCam(bool)
 end
 
 local function openCharMenu(bool)
-    QBCore.Functions.TriggerCallback("qb-multicharacter:server:GetNumberOfCharacters", function(result)
-        SetNuiFocus(bool, bool)
-        SendNUIMessage({
-            action = "ui",
-            toggle = bool,
-            nChar = result,
-            enableDeleteButton = Config.EnableDeleteButton,
-        })
-        skyCam(bool)
+        QBCore.Functions.TriggerCallback("qb-multicharacter:server:GetNumberOfCharacters", function(result)
+            QBCore.Functions.TriggerCallback("qb-multi:server:GetCurrentPlayers", function(Players)
+            SetNuiFocus(bool, bool)
+            SendNUIMessage({
+                action = "ui",
+                toggle = bool,
+                nChar = result,
+                enableDeleteButton = Config.EnableDeleteButton,
+                players = Players,
+            })
+            skyCam(bool)
+        end)
     end)
 end
 
 -- Events
+
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    SendNUIMessage({
+        action = "stopMusic"
+    })
+end)
 
 RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function() -- This event is only for no starting apartments
     DeleteEntity(charPed)

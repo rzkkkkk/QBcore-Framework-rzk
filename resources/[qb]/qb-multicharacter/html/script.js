@@ -4,6 +4,13 @@ qbMultiCharacters = {}
 var Loaded = false;
 var NChar = null;
 var EnableDeleteButton = false;
+var background = document.getElementById("musica_fondo");
+var confirmar = document.getElementById("click");
+var consejoAud = document.getElementById("click");
+var transition = document.getElementById("click");
+var swipe = document.getElementById("click");
+var click = document.getElementById("click");
+var over_button = document.getElementById("click");
 
 $(document).ready(function (){
     window.addEventListener('message', function (event) {
@@ -13,6 +20,14 @@ $(document).ready(function (){
             EnableDeleteButton = data.enableDeleteButton;
             if (data.toggle) {
                 $('.container').show();
+                $('.jugadores-on').hide();
+                $('.bottombar').show();
+                $('.imagenlogo').hide();
+                $('.topbar').show();
+                $('.topbar').css("top", "-50%");
+                $('.bottombar').css("top", "50%");
+                $('.fondocolor').hide();
+                $('.btn-iniciar').hide();
                 $(".welcomescreen").fadeIn(150);
                 qbMultiCharacters.resetAll();
 
@@ -20,6 +35,8 @@ $(document).ready(function (){
                 var loadingProgress = 0;
                 var loadingDots = 0;
                 $("#loading-text").html(originalText);
+                
+                $('.fondocolor').show();
                 var DotsInterval = setInterval(function() {
                     $("#loading-text").append(".");
                     loadingDots++;
@@ -40,7 +57,7 @@ $(document).ready(function (){
                         $("#loading-text").html(originalText);
                         loadingDots = 0;
                     }
-                }, 500);
+                }, 3000);
 
                 setTimeout(function(){
 					setCharactersList()
@@ -49,12 +66,35 @@ $(document).ready(function (){
                         clearInterval(DotsInterval);
                         loadingProgress = 0;
                         originalText = "Retrieving data";
-                        $(".welcomescreen").fadeOut(150);
-                        qbMultiCharacters.fadeInDown('.character-info', '20%', 400);
-                        qbMultiCharacters.fadeInDown('.characters-list', '20%', 400);
-                        $.post('https://qb-multicharacter/removeBlur');
+                        $(".welcomescreen").fadeOut(2000);
+                        $('.imagenlogo').addClass('entrada');
+                        $(".title-screen").fadeIn(100);
+                        $('.btn-iniciar').hide();
+                        $(".title-screen").fadeIn(0, function() {
+                            setTimeout(function() {
+                                $(".imagenlogo").addClass("blinkxd");
+                                qbMultiCharacters.fadeInDown('.topbar', '-95%', 2000);
+                                qbMultiCharacters.fadeInDown('.bottombar', '94.5%', 2000);
+                                qbMultiCharacters.fadeInDown('.imagenlogo', '35%', 2500);
+                                qbMultiCharacters.fadeInDown2('.btn-iniciar', '7%', 1000);
+
+                                $(".fondo-negro").fadeOut(1000);
+                                $('.title-screen').fadeIn(1000);
+                                $('.jugadores-on').html(' ' + data.players + ' Players');
+                            }, 1000);
+                            
+                        });
+                        $(".btn-iniciar").mouseenter(function() {
+                            over_button.play();
+                        });
+                        $("#play, .btn-iniciar").click(function() {
+                            confirmar.play();
+                        });
                     }, 2000);
                 }, 2000);
+                background.volume = 0.3;
+                background.currentTime = 0
+                background.play();
             } else {
                 $('.container').fadeOut(250);
                 qbMultiCharacters.resetAll();
@@ -68,8 +108,10 @@ $(document).ready(function (){
         if (data.action == "setupCharInfo") {
             setupCharInfo(event.data.chardata)
         }
+        if (data.action == "stopMusic") {
+            musicFadeOut();
+        }
     });
-
     $('.datepicker').datepicker();
 });
 
@@ -82,6 +124,18 @@ $('.disconnect-btn').click(function(e){
 
     $.post('https://qb-multicharacter/closeUI');
     $.post('https://qb-multicharacter/disconnectButton');
+});
+
+$(".btn-iniciar").on("click", function() {
+    background.volume = 0.3;
+        $(".title-screen").fadeOut(300, function() {
+            qbMultiCharacters.fadeInDown('.character-info', '20%', 400);
+            qbMultiCharacters.fadeInDown('.characters-list', '20%', 400);
+            $('.jugadores-on').fadeIn();
+            $('.fondocolor').hide();
+            qbMultiCharacters.fadeInDown('.imagenlogo', '0%', 1700);
+            $.post('https://qb-multicharacter/removeBlur');
+        })
 });
 
 function setupCharInfo(cData) {
@@ -108,7 +162,7 @@ function setupCharacters(characters) {
         $('#char-'+char.cid).html("");
         $('#char-'+char.cid).data("citizenid", char.citizenid);
         setTimeout(function(){
-            $('#char-'+char.cid).html('<span id="slot-name">'+char.charinfo.firstname+' '+char.charinfo.lastname+'<span id="cid">' + char.citizenid + '</span></span>');
+            $('#char-'+char.cid).html('<span id="slot-name"> <i class="fa fa-user" aria-hidden="true" style="color:rgb(255, 182, 47);"></i> '+char.charinfo.firstname+' '+char.charinfo.lastname+'<span id="cid">' + char.citizenid + '</span></span>');
             $('#char-'+char.cid).data('cData', char)
             $('#char-'+char.cid).data('cid', char.cid)
         }, 100)
@@ -141,8 +195,8 @@ $(document).on('click', '.character', function(e) {
         } else {
             $(selectedChar).addClass("char-selected");
             setupCharInfo($(this).data('cData'))
-            $("#play-text").html("Play");
-            $("#delete-text").html("Delete");
+            $("#play-text").html('<i class="fa fa-sign-in" aria-hidden="true"></i> Play');
+            $("#delete-text").html('<i class="fa fa-trash" aria-hidden="true"></i> Delete');
             $("#play").css({"display":"block"});
             if (EnableDeleteButton) {
                 $("#delete").css({"display":"block"});
@@ -157,7 +211,7 @@ $(document).on('click', '.character', function(e) {
         if ((selectedChar).data('cid') == "") {
             $(selectedChar).addClass("char-selected");
             setupCharInfo('empty')
-            $("#play-text").html("Register");
+            $("#play-text").html('<i class="fa fa-plus" aria-hidden="true"></i> Register');
             $("#play").css({"display":"block"});
             $("#delete").css({"display":"none"});
             $.post('https://qb-multicharacter/cDataPed', JSON.stringify({
@@ -166,8 +220,8 @@ $(document).on('click', '.character', function(e) {
         } else {
             $(selectedChar).addClass("char-selected");
             setupCharInfo($(this).data('cData'))
-            $("#play-text").html("Play");
-            $("#delete-text").html("Delete");
+            $("#play-text").html('<i class="fa fa-sign-in" aria-hidden="true"></i> Play');
+            $("#delete-text").html('<i class="fa fa-trash" aria-hidden="true"></i> Delete');
             $("#play").css({"display":"block"});
             if (EnableDeleteButton) {
                 $("#delete").css({"display":"block"});
@@ -291,6 +345,9 @@ $("#close-reg").click(function (e) {
     e.preventDefault();
     $('.characters-list').css("filter", "none")
     $('.character-info').css("filter", "none")
+    //mostrar
+    qbMultiCharacters.fadeInDown('.character-info', '20%', 400);
+    qbMultiCharacters.fadeInDown('.characters-list', '20%', 400);
     qbMultiCharacters.fadeOutDown('.character-register', '125%', 400);
 })
 
@@ -317,7 +374,9 @@ $(document).on('click', '#play', function(e) {
         } else {
             $('.characters-list').css("filter", "blur(2px)")
             $('.character-info').css("filter", "blur(2px)")
-            qbMultiCharacters.fadeInDown('.character-register', '25%', 400);
+            //qbMultiCharacters.fadeOutDown('.characters-list', "-40%", 400);
+            qbMultiCharacters.fadeOutDown('.character-info', "-40%", 400);
+            qbMultiCharacters.fadeInDown('.character-register', '25%', 1000);
         }
     }
 });
@@ -330,7 +389,9 @@ $(document).on('click', '#delete', function(e) {
         if (charData !== "") {
             $('.characters-block').css("filter", "blur(2px)")
             $('.character-delete').fadeIn(250);
+            qbMultiCharacters.fadeInDown('.character-delete', '40%', 2500);
         }
+        
     }
 });
 
@@ -356,13 +417,24 @@ qbMultiCharacters.fadeInDown = function(element, percent, time) {
     $(element).css({"display":"block"}).animate({top: percent,}, time);
 }
 
+qbMultiCharacters.fadeInDown2 = function(element, percent, time) {
+    $(element).css({"display":"block"}).animate({'margin-top': percent,}, time);
+}
+
 qbMultiCharacters.resetAll = function() {
     $('.characters-list').hide();
     $('.characters-list').css("top", "-40");
     $('.character-info').hide();
     $('.character-info').css("top", "-40");
     $('.welcomescreen').css("top", WelcomePercentage);
+    $(".main-screen").fadeIn();
+    $(".welcomescreen").fadeIn(300);
+    $(".fondo-negro").fadeIn(0);
     $('.server-log').show();
     $('.server-log').css("top", "25%");
     selectedChar = null;
+}
+
+function musicFadeOut() {
+    $(background).animate({ volume: 0 }, 3000);
 }

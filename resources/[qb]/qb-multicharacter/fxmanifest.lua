@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'QB-Multicharacter'
-version '1.0.0'
+description 'QB-Multicharacter Diseñit wapo de Macro'
+version '1.1.0'
 
 shared_script 'config.lua'
 client_script 'client/main.lua'
@@ -18,7 +18,10 @@ files {
     'html/style.css',
     'html/reset.css',
     'html/profanity.js',
-    'html/script.js'
+    'html/script.js',
+    'html/musica.mp3',
+    'html/click.wav',
+    'html/qb-pixel.png',
 }
 
 dependencies {

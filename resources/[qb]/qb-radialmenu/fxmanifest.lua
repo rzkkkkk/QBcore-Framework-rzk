@@ -9,8 +9,8 @@ ui_page 'html/index.html'
 shared_scripts {
     'config.lua',
     '@qb-core/shared/locale.lua',
-    'locales/en.lua' -- Change this to your preferred language
-    '@Prime-Parking/config.lua',
+    'locales/en.lua', -- Change this to your preferred language
+    --'@Prime-Parking/config.lua',
 }
 
 client_scripts {

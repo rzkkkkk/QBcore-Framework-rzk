@@ -114,10 +114,20 @@ end)
 
 RegisterNetEvent('qb-multicharacter:server:deleteCharacter', function(citizenid)
     local src = source
+    print(src, citizenid)
     QBCore.Player.DeleteCharacter(src, citizenid)
+
 end)
 
 -- Callbacks
+
+QBCore.Functions.CreateCallback('qb-multi:server:GetCurrentPlayers', function(source, cb)
+    local TotalPlayers = 0
+    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+        TotalPlayers = TotalPlayers + 1
+    end
+    cb(TotalPlayers)
+end)
 
 QBCore.Functions.CreateCallback("qb-multicharacter:server:GetUserCharacters", function(source, cb)
     local src = source
