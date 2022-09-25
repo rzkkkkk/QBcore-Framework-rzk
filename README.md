@@ -1,1 +1,1 @@
-Fivem QBCore Framework
+Fivem QBCore Framework for starters
